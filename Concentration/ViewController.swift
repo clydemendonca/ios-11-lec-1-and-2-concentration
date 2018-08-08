@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     ]
     
     //    var emoji = Dictionary<Int, String>()
-    var emoji = [Int: String]()
+    var emoji = [Card: String]()
     
     @IBAction func touchCard(_ sender: UIButton) {
         flipCount += 1
@@ -53,10 +53,10 @@ class ViewController: UIViewController {
     // MARK: Emoji for card
     
     func emoji(for card: Card) -> String {
-        if emoji[card.identifier] == nil, emojiChoices.count > 0 {
-            emoji[card.identifier] = emojiChoices.remove(at: emojiChoices.count.arc4random)
+        if emoji[card] == nil, emojiChoices.count > 0 {
+            emoji[card] = emojiChoices.remove(at: emojiChoices.count.arc4random)
         }
-        return emoji[card.identifier] ?? "?"
+        return emoji[card] ?? "?"
     }
     
 }
