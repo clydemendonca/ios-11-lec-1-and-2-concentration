@@ -24,9 +24,9 @@ class ViewController: UIViewController {
         "👻", "🎃" ,"💩"
     ]
     
-//    var emoji = Dictionary<Int, String>()
+    //    var emoji = Dictionary<Int, String>()
     var emoji = [Int: String]()
-
+    
     @IBAction func touchCard(_ sender: UIButton) {
         flipCount += 1
         if let cardNumber = cardButtons.index(of : sender) {
@@ -34,7 +34,7 @@ class ViewController: UIViewController {
             updateViewFromModel()
         }
     }
-
+    
     func updateViewFromModel() {
         for index in cardButtons.indices {
             let button = cardButtons[index]
@@ -49,6 +49,8 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    // MARK: Emoji for card
     
     func emoji(for card: Card) -> String {
         if emoji[card.identifier] == nil, emojiChoices.count > 0 {
