@@ -11,7 +11,21 @@ import Foundation
 struct Concentration {
     
     var cards = [Card]()
-    var indexOfOneAndOnlyFaceUpCard : Int?
+    var indexOfOneAndOnlyFaceUpCard : Int? {
+        get {
+//            let faceUpCardIndices = cards.indices.filter { cards[$0].isFaceUp }
+//            return faceUpCardIndices.count == 1 ? faceUpCardIndices.first : nil
+            
+            return cards.indices.filter { cards[$0].isFaceUp }.oneAndOnly
+            
+        }
+        
+        set {
+            for index in cards.indices {
+                cards[index].isFaceUp = (index == newValue)
+            }
+        }
+    }
     
     init(numberOfPairsOfCards : Int) {
          assert(numberOfPairsOfCards > 0, "Concentration.init(numberOfPairsOfCards: \(numberOfPairsOfCards): You must have atlease one pair of cards")
@@ -33,17 +47,17 @@ struct Concentration {
                     cards[index].isMatched = true
                 }
                 cards[index].isFaceUp = true
-                indexOfOneAndOnlyFaceUpCard = nil
             } else {
-                // Either no or 2 cards are face up
-                for flipDownIndex in cards.indices {
-                    cards[flipDownIndex].isFaceUp = false
-                }
-                cards[index].isFaceUp = true
                 indexOfOneAndOnlyFaceUpCard = index
             }
         }
         
     }
     
+}
+
+extension Collection {
+    var oneAndOnly : Element? {
+        return count == 1 ? first : nil
+    }
 }
